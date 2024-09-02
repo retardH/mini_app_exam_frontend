@@ -1,7 +1,5 @@
 import "./App.scss"; // Import the CSS file for additional styles
 import Information from "./components/Information";
-import ObjectTest from "./components/ObjectTest";
-import Reset from "./components/Reset";
 import Typography from "./components/Typography";
 
 function App() {
