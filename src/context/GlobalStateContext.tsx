@@ -1,23 +1,25 @@
-// GlobalStateContext.tsx
 import React, { createContext, useContext, useReducer, ReactNode } from "react";
 
 // Define a type for state objects
 interface StateObject<T> {
   name: string;
   value: T;
-  dispatch: React.Dispatch<Action>;
+  dispatch: React.Dispatch<Action<T>>;
 }
 
 // Define the state type
-interface GlobalState {
-  [key: string]: StateObject<any>;
+interface GlobalState<T> {
+  [key: string]: StateObject<T>;
 }
 
 // Define actions for updating state
-type Action = { type: "UPDATE_VALUE"; name: string; value: any };
+type Action<T> = { type: "UPDATE_VALUE"; name: string; value: T };
 
 // Define the reducer
-function globalReducer(state: GlobalState, action: Action): GlobalState {
+function globalReducer<T>(
+  state: GlobalState<T>,
+  action: Action<T>
+): GlobalState<T> {
   switch (action.type) {
     case "UPDATE_VALUE":
       return {
@@ -34,18 +36,14 @@ function globalReducer(state: GlobalState, action: Action): GlobalState {
 
 // Create the context
 const GlobalStateContext = createContext<
-  | {
-      state: GlobalState;
-      dispatch: React.Dispatch<Action>;
-    }
-  | undefined
+  { state: GlobalState<any>; dispatch: React.Dispatch<Action<any>> } | undefined
 >(undefined);
 
 // Create the provider component
 const GlobalStateProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [state, dispatch] = useReducer(globalReducer, {});
+  const [state, dispatch] = useReducer(globalReducer<any>, {});
 
   return (
     <GlobalStateContext.Provider value={{ state, dispatch }}>
@@ -55,12 +53,17 @@ const GlobalStateProvider: React.FC<{ children: ReactNode }> = ({
 };
 
 // Custom hook to use the context
-const useGlobalState = () => {
+const useGlobalContext = <T,>() => {
   const context = useContext(GlobalStateContext);
   if (context === undefined) {
-    throw new Error("useGlobalState must be used within a GlobalStateProvider");
+    throw new Error(
+      "useGlobalContext must be used within a GlobalStateProvider"
+    );
   }
-  return context;
+  return context as {
+    state: GlobalState<T>;
+    dispatch: React.Dispatch<Action<T>>;
+  };
 };
 
-export { GlobalStateProvider, useGlobalState };
+export { GlobalStateProvider, useGlobalContext };

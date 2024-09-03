@@ -1,7 +1,7 @@
-import useStateObject from "../hooks/useGlobalStateObj";
+import useObjState from "@/store/objState.store";
 
 const ObjectTest = () => {
-  const { value: obj } = useStateObject("objState", { value: 1 });
+  const { obj } = useObjState();
   return <div>{JSON.stringify(obj, null, 2)}</div>;
 };
 

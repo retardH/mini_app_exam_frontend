@@ -1,14 +1,14 @@
-import useStateObject from "../hooks/useGlobalStateObj";
+import useCounterState from "@/store/counter.store";
+import useObjState from "@/store/objState.store";
 
 const Decrement = () => {
-  const { value, updateValue } = useStateObject<number>("count");
-  const { value: obj, updateValue: setObj } = useStateObject<{ value: number }>(
-    "objState"
-  );
+  const { count, setCount } = useCounterState();
+  const { obj, setObj } = useObjState();
+
   return (
     <button
       onClick={() => {
-        updateValue(value - 1);
+        setCount(count - 1);
         setObj({ value: obj.value - 1 });
       }}
     >

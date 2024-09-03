@@ -1,16 +1,13 @@
-import useStateObject from "../hooks/useGlobalStateObj";
+import useCounterState from "@/store/counter.store";
+import useObjState from "@/store/objState.store";
 
 const Reset = () => {
-  const { updateValue, resetPersistent } = useStateObject<number>("count");
-  const { updateValue: setObj, resetPersistent: resetObj } = useStateObject<{
-    value: number;
-  }>("objState");
+  const { resetCount } = useCounterState();
+  const { resetObj } = useObjState();
 
   const handleReset = () => {
-    updateValue(1);
-    setObj({ value: 1 });
-    resetPersistent();
-    resetObj();
+    resetCount(1);
+    resetObj({ value: 1 });
   };
   return (
     <div>

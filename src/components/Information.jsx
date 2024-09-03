@@ -1,4 +1,4 @@
-import useStateObject from "../hooks/useGlobalStateObj";
+import useCounterState from "@/store/counter.store";
 import Decrement from "./Decrement";
 import Increment from "./Increment";
 import ObjectTest from "./ObjectTest";
@@ -6,7 +6,7 @@ import Reset from "./Reset";
 import Typography from "./Typography";
 
 const Information = () => {
-  const { value } = useStateObject("count", 1);
+  const { count } = useCounterState();
   return (
     <div>
       <Typography
@@ -24,7 +24,7 @@ const Information = () => {
       </Typography>
 
       <Typography textAlign="center">
-        {value}
+        Persist State: {count}
         <ObjectTest />
       </Typography>
     </div>
