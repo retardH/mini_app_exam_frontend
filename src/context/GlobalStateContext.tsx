@@ -12,8 +12,10 @@ interface GlobalState<T> {
   [key: string]: StateObject<T>;
 }
 
-// Define actions for updating state
-type Action<T> = { type: "UPDATE_VALUE"; name: string; value: T };
+// Modify Action type to support either a direct value or a function
+type Action<T> =
+  | { type: "UPDATE_VALUE"; name: string; value: T }
+  | { type: "UPDATE_VALUE"; name: string; value: (prevValue: T) => T };
 
 // Define the reducer
 function globalReducer<T>(
@@ -22,11 +24,20 @@ function globalReducer<T>(
 ): GlobalState<T> {
   switch (action.type) {
     case "UPDATE_VALUE":
+      // Handle functional updates (when action.value is a function)
+      const currentValue = state[action.name]?.value;
+
+      // Check if action.value is a function and apply it if necessary
+      const newValue =
+        typeof action.value === "function"
+          ? (action.value as (prevValue: T) => T)(currentValue)
+          : action.value;
+
       return {
         ...state,
         [action.name]: {
           ...state[action.name],
-          value: action.value,
+          value: newValue,
         },
       };
     default:

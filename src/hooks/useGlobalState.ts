@@ -36,10 +36,15 @@ const useGlobalState = <T>({ name: stateName, defaultValue, isPersist }: { name:
 
 
 
-    const updateValue = (newValue: T) => {
-        dispatch({ type: 'UPDATE_VALUE', name: stateName, value: newValue } as Action<T>);
-        isPersistAndSetLocalStorage(newValue);
-        setValue(newValue);
+    const updateValue = (newValue: T | ((prevValue: T) => T)) => {
+        // If newValue is a function, call it with the current value to get the new value
+        const updatedValue = typeof newValue === 'function' ?
+            (newValue as (prevValue: T) => T)(value as T) // this is function call syntax eg: newValue(value) newValue is passed void function
+            : newValue;
+
+        dispatch({ type: 'UPDATE_VALUE', name: stateName, value: updatedValue } as Action<T>);
+        isPersistAndSetLocalStorage(updatedValue);
+        setValue(updatedValue);
     };
 
     const resetPersistent = (resetValue?: T) => {

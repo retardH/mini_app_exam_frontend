@@ -2,7 +2,7 @@ import useGlobalState from "@/hooks/useGlobalState";
 
 interface CounterState {
     count: number;
-    setCount: (count: number) => void;
+    setCount: (count: number | ((prevCount: number) => number)) => void;
     resetCount: (resetValue?: number) => void;
 }
 
