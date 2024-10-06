@@ -1,4 +1,3 @@
-import "./App.scss"; // Import the CSS file for additional styles
 import Information from "./components/Information";
 import Typography from "./components/Typography";
 

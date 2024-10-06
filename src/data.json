@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "Apple",
+    "price": 50,
+    "category": ["fruit"],
+    "image": "./apple.png"
+  },
+  {
+    "id": 2,
+    "name": "Carrot",
+    "price": 60,
+    "category": ["fruit"],
+    "image": "./carrot.png"
+  },
+  {
+    "id": 3,
+    "name": "Cauli Flower",
+    "price": 88,
+    "category": ["fruit"],
+    "image": "./cauli_flower.png"
+  },
+  {
+    "id": 4,
+    "name": "Lattuce",
+    "price": 100,
+    "category": ["fruit"],
+    "image": "./lattuce.png"
+  },
+  {
+    "id": 5,
+    "name": "Tomato",
+    "price": 40,
+    "category": ["fruit"],
+    "image": "./tomato.png"
+  },
+  {
+    "id": 6,
+    "name": "Chicken Breast",
+    "price": 120,
+    "category": ["meat"],
+    "image": "./chicken_breast.png"
+  },
+  {
+    "id": 7,
+    "name": "Raw Bacon",
+    "price": 150,
+    "category": ["meat"],
+    "image": "./raw_bacon.png"
+  },
+  {
+    "id": 8,
+    "name": "Beef",
+    "price": 200,
+    "category": ["meat"],
+    "image": "./raw_beef.png"
+  },
+  {
+    "id": 9,
+    "name": "Salmon",
+    "price": 300,
+    "category": ["fish"],
+    "image": "./salmon.png"
+  },
+  {
+    "id": 10,
+    "name": "Dragon Fruit",
+    "price": 110,
+    "category": ["fruit"],
+    "image": "./dragon_fruit.png"
+  }
+]
