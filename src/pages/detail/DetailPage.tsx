@@ -3,9 +3,11 @@ import dataJson from "@/data.json";
 import TopBar from "@/components/top-bar/TopBar";
 import { LoveIcon, StarIcon } from "@/components/icons";
 import OrderInformation from "@/components/order-info/OrderInformation";
+import { useAppContext } from "@/context/AppContext";
 
 const DetailPage = () => {
   const { id = "" } = useParams();
+  const { state, dispatch } = useAppContext();
   const productDetail = dataJson.find((product) => product.id === +id);
 
   return (
@@ -70,7 +72,21 @@ const DetailPage = () => {
         <div>
           <OrderInformation
             renderTriggerBtn={() => (
-              <button className="py-2 px-4 w-full text-white bg-green-600 rounded-md">
+              <button
+                onClick={() => {
+                  dispatch({
+                    type: "ADD_TO_CART",
+                    payload: {
+                      id: productDetail?.id,
+                      name: productDetail?.name,
+                      price: productDetail?.price,
+                      image: productDetail?.image,
+                      quantity: 1,
+                    },
+                  });
+                }}
+                className="py-2 px-4 w-full text-white bg-green-600 rounded-md"
+              >
                 Add to Cart
               </button>
             )}

@@ -68,5 +68,26 @@
     "price": 110,
     "category": ["fruit"],
     "image": "./dragon_fruit.png"
+  },
+  {
+    "id": 11,
+    "name": "Red Bull Drink",
+    "price": 100,
+    "category": ["drink"],
+    "image": "./redbull.png"
+  },
+  {
+    "id": 12,
+    "name": "Monster Energy Drink",
+    "price": 200,
+    "category": ["drink"],
+    "image": "./monster_drink.png"
+  },
+  {
+    "id": 13,
+    "name": "Coca Cola",
+    "price": 46,
+    "category": ["drink"],
+    "image": "./cocacola.png"
   }
 ]
