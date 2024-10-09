@@ -4,13 +4,10 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/drawer/Drawer";
+} from "@/components/ui/Drawer";
 import { FC, ReactNode } from "react";
-import dataJson from "@/data.json";
 import { MinusIcon, PlusIcon, TrashIcon } from "../icons";
 import { useAppContext } from "@/context/AppContext";
-
-const orderItems = [dataJson[6]];
 
 interface OrderInformationProps {
   renderTriggerBtn: () => ReactNode;

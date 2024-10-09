@@ -48,6 +48,20 @@ const appReducer = (
         userId: action?.payload,
       };
     case "ADD_TO_CART":
+      const itemAlreadyInCart = state.cart.find(
+        (item) => item.id === action?.payload.id
+      );
+      if (itemAlreadyInCart) {
+        return {
+          ...state,
+          cart: state.cart.map((item) => {
+            if (item.id === action?.payload.id) {
+              return action?.payload;
+            }
+            return item;
+          }),
+        };
+      }
       return {
         ...state,
         cart: [...state.cart, action?.payload],
@@ -73,10 +87,19 @@ const appReducer = (
         ...state,
         cart: state.cart.map((item) => {
           if (item.id === action?.payload) {
-            return { ...item, quantity: item.quantity - 1 };
+            return {
+              ...item,
+              quantity: item.quantity === 1 ? item.quantity : item.quantity - 1,
+            };
           }
           return item;
         }),
+      };
+
+    case "CLEAR_CART":
+      return {
+        ...state,
+        cart: [],
       };
   }
   return state;

@@ -22,7 +22,9 @@ const TopBar: FC<TopBarProps> = ({
       ) : (
         <div></div>
       )}
-      <h4 className="text-lg font-medium">{title}</h4>
+      <h4 className="text-lg absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-medium">
+        {title}
+      </h4>
       {renderRightIcon ? renderRightIcon() : <div></div>}
     </header>
   );

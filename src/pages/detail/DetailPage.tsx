@@ -7,7 +7,7 @@ import { useAppContext } from "@/context/AppContext";
 
 const DetailPage = () => {
   const { id = "" } = useParams();
-  const { state, dispatch } = useAppContext();
+  const { dispatch } = useAppContext();
   const productDetail = dataJson.find((product) => product.id === +id);
 
   return (

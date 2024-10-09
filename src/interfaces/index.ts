@@ -5,3 +5,7 @@ export interface CreateOrderResponse {
   sign: string;
   signType: string;
 }
+
+export interface GetUserInfoRequestPayload {
+  access_token: string;
+}

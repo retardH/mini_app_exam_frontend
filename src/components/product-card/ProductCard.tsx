@@ -35,7 +35,7 @@ const ProductCard: FC<ProductCardProps> = ({ name, price, image, rating }) => {
         height={120}
       />
       <div className="w-full">
-        <h4>{name}</h4>
+        <h4 className="text-sm">{name}</h4>
       </div>
       <div className="w-full flex items-center justify-between">
         <p className="text-sm">${price}</p>
