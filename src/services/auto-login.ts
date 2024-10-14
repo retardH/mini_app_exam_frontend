@@ -1,6 +1,9 @@
+import { GetUserInfoResponse } from "@/interfaces";
 import { apiClient } from "@/utils/apiClient";
 
-export const getUserInfo = async (accessToken: string) => {
+export const getUserInfo = async (
+  accessToken: string
+): Promise<GetUserInfoResponse> => {
   try {
     const response = await apiClient.post("/autoLogin/get-userInfo", {
       access_token: accessToken,

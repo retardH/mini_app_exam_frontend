@@ -35,13 +35,13 @@ const ProductCard: FC<ProductCardProps> = ({ name, price, image, rating }) => {
         height={120}
       />
       <div className="w-full">
-        <h4 className="text-sm">{name}</h4>
+        <h4 className="text-md w-full truncate">{name}</h4>
       </div>
       <div className="w-full flex items-center justify-between">
         <p className="text-sm">${price}</p>
         <div className="flex items-center gap-1">
           <StarIcon
-            fill="#f59e0b"
+            // fill="#f59e0b"
             strokeColor="#f59e0b"
             width={20}
             height={20}

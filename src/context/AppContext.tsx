@@ -1,13 +1,14 @@
 import { createContext, Dispatch, useContext, useReducer } from "react";
 
+interface CartItem {
+  id: number;
+  name: string;
+  image: string;
+  quantity: number;
+  price: number;
+}
 interface AppContextState {
-  cart: Array<{
-    id: number;
-    name: string;
-    image: string;
-    quantity: number;
-    price: number;
-  }>;
+  cart: Array<CartItem>;
   favoriteItems: Array<{
     id: number;
     name: string;
@@ -22,7 +23,15 @@ interface AppContextProviderProps {
   dispatch: Dispatch<TAction<any>>;
 }
 
-type TAction<TData extends any = any> = {
+// type TActionType =
+//   | "ADD_TO_CART"
+//   | "REMOVE_FROM_CART"
+//   | "SET_USER_ID"
+//   | "CLEAR_CART"
+//   | "INCREASE_ITEM_QUANTITY"
+//   | "DECREASE_ITEM_QUANTITY";
+
+type TAction<TData extends {} = any> = {
   type:
     | "ADD_TO_CART"
     | "REMOVE_FROM_CART"
@@ -101,8 +110,9 @@ const appReducer = (
         ...state,
         cart: [],
       };
+    default:
+      return state;
   }
-  return state;
 };
 
 const defaultState: AppContextState = {

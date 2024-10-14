@@ -95,4 +95,5 @@ type NativeAPI =
   | "ON_BT_DEVICE_FOUND"
   | "offBluetoothDeviceFound"
   | "tradePay"
-  | "startPay";
+  | "startPay"
+  | "gethwssostring";

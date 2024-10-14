@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import dataJson from "@/data.json";
+import dataJson from "@/constants";
 import TopBar from "@/components/top-bar/TopBar";
 import { LoveIcon, StarIcon } from "@/components/icons";
 import OrderInformation from "@/components/order-info/OrderInformation";

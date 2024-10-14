@@ -81,11 +81,17 @@ const OrderInformation: FC = () => {
                 );
               })
             ) : (
-              <div className="text-center text-sm">
+              <div className="text-center text-stone-600 text-sm">
                 No Item In The Cart Yet.
               </div>
             )}
           </div>
+          {/* <Link
+            to="/"
+            className="w-full py-2 px-3 max-w-max mx-auto border-2 text-sm border-green-600 text-green-600 rounded-md"
+          >
+            Add More
+          </Link> */}
         </div>
         <footer className="flex p-2 items-center gap-8 flex-row justify-between">
           <div>

@@ -1,7 +1,7 @@
 import { SearchIcon, ShoppingBasketIcon } from "@/components/icons";
 import ProductDetailDrawer from "@/components/product-detail-drawer/ProductDetailDrawer";
 import { useAppContext } from "@/context/AppContext";
-import dataJson from "@/data.json";
+import dataJson from "@/constants";
 import { useDebounceState } from "@/hooks/useDebounceState";
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
@@ -10,6 +10,10 @@ const HomePage = () => {
   const { state } = useAppContext();
   const [searchInput, setSearchInput] = useState("");
   const debouncedSearchInput = useDebounceState(searchInput, 200);
+
+  const totalQuantityInCart = state.cart.reduce((acc, item) => {
+    return acc + item.quantity;
+  }, 0);
 
   const filterData = useMemo(() => {
     return dataJson.filter((data) => {
@@ -44,6 +48,9 @@ const HomePage = () => {
             <SearchIcon width={16} height={16} />
           </button>
         </div>
+        {/* <div className="mt-4">
+          <CategorySelectTabs />
+        </div> */}
         <main className="mt-4 grid grid-cols-2 gap-2">
           {filterData.map((product) => {
             const initialQuantityInCart =
@@ -71,6 +78,9 @@ const HomePage = () => {
         to="/order-info"
         className="fixed bottom-4 shadow-md right-4 p-3 rounded-full bg-green-600 text-white"
       >
+        <div className="absolute top-0 right-0 text-center flex items-center justify-center w-4 h-4 bg-red-500 rounded-full text-white text-[10px]">
+          {totalQuantityInCart}
+        </div>
         <ShoppingBasketIcon width={24} height={24} />
       </Link>
     </>
