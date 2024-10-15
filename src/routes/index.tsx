@@ -1,6 +1,9 @@
+import { useAppContext } from "@/context/AppContext";
 import HomePage from "@/pages/home/HomePage";
 import OrderInformation from "@/pages/order-info/CartPage";
 import ReceiptPage from "@/pages/receipt/ReceiptPage";
+import { getUserInfo } from "@/services/auto-login";
+import { useEffect } from "react";
 import { RouterProvider } from "react-router";
 import { createMemoryRouter } from "react-router-dom";
 
@@ -24,30 +27,28 @@ const routes = createMemoryRouter([
 ]);
 
 const AppRoutes = () => {
-  // const { dispatch } = useAppContext();
-  // useEffect(() => {
-  // window.ma.callNativeAPI(
-  //   "gethwssostring",
-  //   { merchantAppId: "kp28b334394b244516a1f5ba436fb7bf" },
-  //   (res) => {
-  //     console.log("ssostring: ", res);
-  //   }
-  // );
-
-  // getUserInfo(
-  //   "90cedc3b93464659704586cf67947ff9" // replace with token from ma.callNativeApi()
-  // )
-  //   .then((data) => {
-  //     console.log("get user info response === ", data);
-  //     dispatch({
-  //       type: "SET_USER_ID",
-  //       payload: data.Response.customer_info.openID,
-  //     });
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
-  // }, []);
+  const { dispatch } = useAppContext();
+  useEffect(() => {
+    window.ma.callNativeAPI(
+      "gethwssostring",
+      { merchantAppId: "kp7595593cfcbf4af38d381570001225" },
+      (res) => {
+        console.log("ssostring: ", res);
+        const callbackKey = res.xm_string_callback_key;
+        getUserInfo(callbackKey)
+          .then((data) => {
+            console.log("get user info response === ", data);
+            dispatch({
+              type: "SET_USER_ID",
+              payload: data.Response.customer_info.openID,
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    );
+  }, []);
 
   return (
     <>

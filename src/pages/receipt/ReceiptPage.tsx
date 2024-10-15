@@ -40,11 +40,13 @@ const ReceiptPage = () => {
             .then(() => {
               console.log("Payment Success");
             });
+
+          // clear cart and navigate back to home page
+          dispatch({
+            type: "CLEAR_CART",
+          });
+          navigate("/", { replace: true });
         });
-        dispatch({
-          type: "CLEAR_CART",
-        });
-        navigate("/", { replace: true });
       } else {
         alert("Payment Failed");
       }
