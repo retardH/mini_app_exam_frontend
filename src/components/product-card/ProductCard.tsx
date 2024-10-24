@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { LoveIcon, StarIcon } from "../icons";
 
 interface ProductCardProps {
@@ -6,18 +6,25 @@ interface ProductCardProps {
   price: number;
   image: string;
   rating: number;
+  isFavorite: boolean;
+  onFavoriteIconClick: () => void;
 }
 
-const ProductCard: FC<ProductCardProps> = ({ name, price, image, rating }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
+const ProductCard: FC<ProductCardProps> = ({
+  name,
+  price,
+  image,
+  rating,
+  isFavorite,
+  onFavoriteIconClick,
+}) => {
   return (
-    <div className="w-full relative p-3 pt-4 rounded-md flex-col bg-white flex items-center justify-center gap-1 shadow-sm">
+    <div className="w-full relative p-3 pt-4 rounded-md flex-col bg-white flex items-center justify-center gap-1 border">
       <button
         className="absolute p-1 top-2 right-2"
         onClick={(e) => {
-          e.preventDefault();
           e.stopPropagation();
-          setIsFavorite(!isFavorite);
+          onFavoriteIconClick();
         }}
       >
         <LoveIcon

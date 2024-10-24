@@ -22,8 +22,8 @@ const OrderInformation: FC<OrderInformationProps> = ({ renderTriggerBtn }) => {
           <DrawerTitle>Order Information</DrawerTitle>
         </DrawerHeader>
         <div className="p-2 min-h-[200px] flex flex-col gap-2">
-          <h6>Your items</h6>
-          <div className="flex flex-col gap-2">
+          {/* <h6>Your items</h6> */}
+          <div className="flex flex-col gap-3">
             {state.cart.length > 0 ? (
               state.cart.map((item) => {
                 return (
@@ -74,7 +74,7 @@ const OrderInformation: FC<OrderInformationProps> = ({ renderTriggerBtn }) => {
             )}
           </div>
         </div>
-        <footer className="flex px-2 py-4 items-center gap-8 flex-row justify-between">
+        <footer className="flex px-2 py-4 items-center gap-2 flex-row">
           <div>
             <p className="text-sm">Total</p>
             <p className="font-medium">$230</p>

@@ -5,10 +5,13 @@ import dataJson from "@/constants";
 import { useDebounceState } from "@/hooks/useDebounceState";
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { ScrollArea, ScrollBar } from "@/components/ui/ScrollArea";
+import clsx from "clsx";
 
 const HomePage = () => {
   const { state } = useAppContext();
   const [searchInput, setSearchInput] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const debouncedSearchInput = useDebounceState(searchInput, 200);
 
   const totalQuantityInCart = state.cart.reduce((acc, item) => {
@@ -16,17 +19,27 @@ const HomePage = () => {
   }, 0);
 
   const filterData = useMemo(() => {
-    return dataJson.filter((data) => {
-      if (
-        data.name
-          .toLocaleLowerCase()
-          .startsWith(debouncedSearchInput.toLocaleLowerCase())
-      ) {
+    return dataJson
+      .filter((data) => {
+        if (selectedCategory !== "all") {
+          if (!data.category.includes(selectedCategory)) {
+            return false;
+          }
+          return true;
+        }
         return true;
-      }
-      return false;
-    });
-  }, [debouncedSearchInput]);
+      })
+      .filter((data) => {
+        if (
+          data.name
+            .toLocaleLowerCase()
+            .startsWith(debouncedSearchInput.toLocaleLowerCase())
+        ) {
+          return true;
+        }
+        return false;
+      });
+  }, [debouncedSearchInput, selectedCategory]);
 
   return (
     <>
@@ -48,10 +61,37 @@ const HomePage = () => {
             <SearchIcon width={16} height={16} />
           </button>
         </div>
-        {/* <div className="mt-4">
-          <CategorySelectTabs />
-        </div> */}
-        <main className="mt-4 grid grid-cols-2 gap-2">
+        <div className="my-2">
+          <ScrollArea className="w-full whitespace-nowrap p-2">
+            <div className="flex items-center gap-2">
+              {["all", "veggies", "meats", "drinks", "fishes", "fruits"].map(
+                (category) => {
+                  return (
+                    <div
+                      key={category}
+                      role="button"
+                      className={clsx(
+                        "border px-4 py-1 min-w-[60px] capitalize rounded-full text-sm text-center",
+                        category === selectedCategory &&
+                          "bg-green-500 text-white"
+                      )}
+                      onClick={() => {
+                        setSelectedCategory(category);
+                      }}
+                    >
+                      {category}
+                    </div>
+                  );
+                }
+              )}
+            </div>
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
+        </div>
+        <h4 className="text-lg mb-2 underline underline-offset-4 capitalize decoration-stone-300">
+          {selectedCategory !== "all" ? selectedCategory : "All Items"}
+        </h4>
+        <main className="grid grid-cols-2 gap-2">
           {filterData.map((product) => {
             const initialQuantityInCart =
               state.cart.find((item) => item.id === product.id)?.quantity || 1;

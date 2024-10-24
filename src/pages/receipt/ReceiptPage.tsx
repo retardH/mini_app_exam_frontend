@@ -60,7 +60,7 @@ const ReceiptPage = () => {
       <TopBar title="Receipt" />
       <div className="mt-[60px] flex flex-col h-[calc(100dvh-60px)] p-2">
         <div className="flex-grow">
-          <div className="bg-stone-50 px-4 pt-5 pb-6 shadow-sm border rounded-sm text-sm">
+          <div className="bg-stone-50 px-4 pt-5 pb-6 shadow-sm border rounded-md text-sm">
             <h4 className="text-lg font-medium">Order Summary</h4>
             <ul className="space-y-1 mt-2">
               {state.cart.map((item) => {
@@ -93,8 +93,8 @@ const ReceiptPage = () => {
         </div>
         <footer className="space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-lg font-medium">Total</span>
-            <span className="text-lg font-medium">
+            <span className="text-lg">Total</span>
+            <span className="text-lg font-semibold">
               ${totalPrice + deliveryFee}
             </span>
           </div>

@@ -3,6 +3,7 @@ import { MinusIcon, PlusIcon, TrashIcon } from "@/components/icons";
 import { useAppContext } from "@/context/AppContext";
 import TopBar from "@/components/top-bar/TopBar";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/Button";
 
 const OrderInformation: FC = () => {
   const { state, dispatch } = useAppContext();
@@ -15,7 +16,7 @@ const OrderInformation: FC = () => {
       <TopBar title="Cart" />
       <section className="mt-[60px] flex flex-col h-[calc(100dvh-60px)]">
         <div className="p-2 pb-4 overflow-scroll flex-grow flex flex-col gap-2">
-          <h6 className="text-lg">Your items</h6>
+          {/* <h6 className="text-lg">Your items</h6> */}
           <div className="flex flex-col gap-2">
             {state.cart.length > 0 ? (
               state.cart.map((item) => {
@@ -28,14 +29,16 @@ const OrderInformation: FC = () => {
                       <img
                         src={item.image}
                         alt={item.name}
-                        width={100}
-                        height={100}
-                        className="w-[100px] h-[100px] object-contain object-center"
+                        width={80}
+                        height={80}
+                        className="w-[80px] h-[80px] object-contain object-center"
                       />
                     </figure>
-                    <div className="h-full flex-grow flex flex-col">
-                      <h4 className="font-medium">{item.name}</h4>
-                      <span className="text-sm">${item.price}</span>
+                    <div className="h-full justify-between flex-grow flex flex-col">
+                      <div>
+                        <h4 className="font-medium">{item.name}</h4>
+                        <span className="text-sm">${item.price}</span>
+                      </div>
                       <div className="mt-2 flex w-full items-center justify-between">
                         <div
                           role="button"
@@ -81,11 +84,20 @@ const OrderInformation: FC = () => {
                 );
               })
             ) : (
-              <div className="text-center text-stone-600 text-sm">
+              <div className="text-center text-stone-600 mt-4 text-sm">
                 No Item In The Cart Yet.
               </div>
             )}
           </div>
+          <Button
+            variant="link"
+            size="sm"
+            className="text-green-600 gap-0 bg-green-100/50 rounded-xl max-w-max mx-auto mt-2"
+            onClick={() => navigate("/home")}
+          >
+            <PlusIcon width={8} height={8} />
+            <span className="text-xs">Add More</span>
+          </Button>
           {/* <Link
             to="/"
             className="w-full py-2 px-3 max-w-max mx-auto border-2 text-sm border-green-600 text-green-600 rounded-md"
@@ -93,18 +105,21 @@ const OrderInformation: FC = () => {
             Add More
           </Link> */}
         </div>
-        <footer className="flex p-2 items-center gap-8 flex-row justify-between">
+        <footer className="flex p-2 items-center gap-2 flex-row">
           <div>
             <p className="text-sm">Total</p>
-            <p className="font-medium w-[50px] text-left">${totalPrice}</p>
+            <p className="font-semibold tracking-wide w-[50px] text-left">
+              ${totalPrice}
+            </p>
           </div>
-          <button
+          <Button
             disabled={totalPrice <= 0}
-            className="py-2 w-full px-4 disabled:bg-stone-300 text-white rounded-md bg-green-600"
+            className="w-full"
+            // className="py-2 w-full flex-grow px-4 disabled:bg-stone-300 text-white rounded-md bg-green-600"
             onClick={() => navigate("/receipt")}
           >
             Order Now
-          </button>
+          </Button>
         </footer>
       </section>
     </>

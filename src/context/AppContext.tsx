@@ -38,7 +38,8 @@ type TAction<TData extends {} = any> = {
     | "SET_USER_ID"
     | "CLEAR_CART"
     | "INCREASE_ITEM_QUANTITY"
-    | "DECREASE_ITEM_QUANTITY";
+    | "DECREASE_ITEM_QUANTITY"
+    | "TOGGLE_FAVORITE_ITEM";
   payload?: TData;
 };
 
@@ -109,6 +110,19 @@ const appReducer = (
       return {
         ...state,
         cart: [],
+      };
+    case "TOGGLE_FAVORITE_ITEM":
+      if (state.favoriteItems.find((item) => item.id === action?.payload.id)) {
+        return {
+          ...state,
+          favoriteItems: state.favoriteItems.filter(
+            (item) => item.id !== action?.payload.id
+          ),
+        };
+      }
+      return {
+        ...state,
+        favoriteItems: [...state.favoriteItems, action?.payload],
       };
     default:
       return state;
